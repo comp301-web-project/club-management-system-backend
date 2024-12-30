@@ -1,7 +1,7 @@
 package org.clubmanagementsystem.eventmanagementservice.repository;
 
-import org.clubmanagementsystem.eventmanagementservice.model.Events;
+import org.clubmanagementsystem.eventmanagementservice.model.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EventRepository extends JpaRepository<Events, Long> {
+public interface EventRepository extends JpaRepository<Event, Long> {
 }

@@ -1,16 +1,15 @@
-package org.clubmanagementsystem.eventmanagementservice.model;
-
+package org.clubmanagementsystem.usermanagementservice.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 
-import java.util.Base64;
 import java.util.Date;
 
 @Entity
 @Data
-public class Events {
 
+public class ClubManager {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long eventId;
@@ -42,5 +41,4 @@ public class Events {
     @Basic
     @Column(name = "updatedDate")
     private Long updatedDate;
-
 }

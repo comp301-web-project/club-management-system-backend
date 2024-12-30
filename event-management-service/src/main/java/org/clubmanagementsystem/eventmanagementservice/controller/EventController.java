@@ -1,6 +1,6 @@
 package org.clubmanagementsystem.eventmanagementservice.controller;
 
-import org.clubmanagementsystem.eventmanagementservice.model.Events;
+import org.clubmanagementsystem.eventmanagementservice.model.Event;
 import org.clubmanagementsystem.eventmanagementservice.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,7 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<Events> createEvent(@RequestBody Events event) {
+    public ResponseEntity<Event> createEvent(@RequestBody Event event) {
         return new ResponseEntity<>(eventService.createEvent(event), HttpStatus.CREATED);
     }
 

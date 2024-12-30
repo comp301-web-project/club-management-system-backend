@@ -1,7 +1,7 @@
 package org.clubmanagementsystem.eventmanagementservice.service;
 
 
-import org.clubmanagementsystem.eventmanagementservice.model.Events;
+import org.clubmanagementsystem.eventmanagementservice.model.Event;
 import org.clubmanagementsystem.eventmanagementservice.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class EventService {
         this.eventRepository = eventRepository;
     }
 
-    public Events createEvent(Events event) {
+    public Event createEvent(Event event) {
         return eventRepository.save(event);
     }
 }
