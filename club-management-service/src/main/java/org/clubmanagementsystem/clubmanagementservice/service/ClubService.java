@@ -2,7 +2,6 @@ package org.clubmanagementsystem.clubmanagementservice.service;
 
 
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.clubmanagementsystem.clubmanagementservice.model.Clubs;
 import org.clubmanagementsystem.clubmanagementservice.repository.ClubRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +11,11 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-
 @Transactional
 public class ClubService {
 
-
     private ClubRepository clubRepository;
-    @Autowired
+
     public ClubService(ClubRepository clubRepository) {
         this.clubRepository = clubRepository;
     }
