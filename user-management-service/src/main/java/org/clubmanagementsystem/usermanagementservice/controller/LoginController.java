@@ -17,10 +17,19 @@ public class LoginController {
         this.loginService = loginService;
     }
 
-    @PostMapping("/login")
+    @PostMapping("/login/student")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
 
-        boolean isValid = loginService.login(loginRequest.getEmail(), loginRequest.getPassword());
+        boolean isValid = loginService.loginStudent(loginRequest.getEmail(), loginRequest.getPassword());
+        if (isValid) {
+            return ResponseEntity.ok("Login successful");
+        } else {
+            return ResponseEntity.badRequest().body("Invalid credentials");
+        }
+    }
+    @PostMapping("/login/clubManager")
+    public ResponseEntity<?> loginStudent(@RequestBody LoginRequest loginRequest) {
+        boolean isValid = loginService.loginClubManager(loginRequest.getEmail(), loginRequest.getPassword());
         if (isValid) {
             return ResponseEntity.ok("Login successful");
         } else {

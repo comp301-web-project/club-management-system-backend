@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ClubManagerRepository extends JpaRepository<ClubManager, Long> {
+    boolean existsByEmailAndPassword(String email, String password);
 }
