@@ -2,10 +2,10 @@ package org.clubmanagementsystem.clubmanagementservice.service;
 
 
 import jakarta.transaction.Transactional;
-import org.clubmanagementsystem.clubmanagementservice.model.Clubs;
+import org.clubmanagementsystem.clubmanagementservice.model.Club;
 import org.clubmanagementsystem.clubmanagementservice.repository.ClubRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.util.Date;
 import java.util.List;
@@ -20,31 +20,29 @@ public class ClubService {
         this.clubRepository = clubRepository;
     }
 
-    public Clubs createClub(Clubs club) {
+    public Club createClub(Club club) {
         club.setCreatedDate(new Date());
-        club.setUpdatedDate(new Date());
         return clubRepository.save(club);
     }
 
-    public Clubs getClubById(Long id) {
+    public Club getClubById(Long id) {
         return clubRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Club not found with id: " + id));
     }
 
-    public List<Clubs> getAllClubs() {
+    public List<Club> getAllClubs() {
         return clubRepository.findAll();
     }
 
-    public Clubs updateClub(Long id, Clubs clubDetails) {
-        Clubs club = getClubById(id);
+    public Club updateClub(Long id, Club clubDetails) {
+        Club club = getClubById(id);
         club.setName(clubDetails.getName());
         club.setDescription(clubDetails.getDescription());
-        club.setUpdatedDate(new Date());
         return clubRepository.save(club);
     }
 
     public void deleteClub(Long id) {
-        Clubs club = getClubById(id);
+        Club club = getClubById(id);
         clubRepository.delete(club);
     }
 

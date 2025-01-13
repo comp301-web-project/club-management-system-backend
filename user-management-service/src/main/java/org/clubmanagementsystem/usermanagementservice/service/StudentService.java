@@ -18,8 +18,8 @@ public class StudentService {
     }
 
     public Student createStudent(Student student) {
-        student.setCreatedDate(new Date().getTime());
-        student.setUpdatedDate(new Date().getTime());
+        student.getName();
+        student.getClubs();
         return studentRepository.save(student);
     }
 
@@ -36,11 +36,7 @@ public class StudentService {
         Student student = getStudentById(id);
 
         student.setName(studentDetails.getName());
-        student.setDescription(studentDetails.getDescription());
-        student.setStartDate(studentDetails.getStartDate());
-        student.setEndDate(studentDetails.getEndDate());
-        student.setClubId(studentDetails.getClubId());
-        student.setUpdatedDate(new Date().getTime());
+        student.setClubs(studentDetails.getClubs());
 
         return studentRepository.save(student);
     }

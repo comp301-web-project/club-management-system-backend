@@ -1,111 +1,58 @@
 package org.clubmanagementsystem.usermanagementservice.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.util.Date;
-
+import java.util.List;
+@Table(name = "Student")
 @Entity
-@Getter
-@Setter
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long eventId;
+    private Long Id;
 
     @Basic
     @Column(name = "name")
     private String name;
 
     @Basic
-    @Column(name = "description")
-    private String description;
+    @Column(name = "email")
+    private String email;
 
     @Basic
-    @Column(name = "startDate")
-    private Date startDate;
+    @Column(name = "password")
+    private String password;
 
     @Basic
-    @Column(name = "endDate")
-    private Date endDate;
+    @Column(name = "year")
+    private String year;
 
     @Basic
-    @Column(name = "clubId")
-    private Long clubId;
+    @Column(name = "address")
+    private String address;
 
-    @Basic
-    @Column(name = "createdDate")
-    private Long createdDate;
+    @ElementCollection
+    @Column(name = "clubs")
+    private List<Long> clubs;
 
-    @Basic
-    @Column(name = "updatedDate")
-    private Long updatedDate;
 
-    // Getter methods
-    public Long getEventId() {
-        return eventId;
+    // Getter and Setter methods
+
+    public Long getId() {
+        return Id;
     }
-
+    public void setId(Long id) {
+        Id = id;
+    }
     public String getName() {
         return name;
     }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public Long getClubId() {
-        return clubId;
-    }
-
-    public Long getCreatedDate() {
-        return createdDate;
-    }
-
-    public Long getUpdatedDate() {
-        return updatedDate;
-    }
-
-    // Setter methods
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public List<Long> getClubs() {
+        return clubs;
     }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public void setClubId(Long clubId) {
-        this.clubId = clubId;
-    }
-
-    public void setCreatedDate(Long createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public void setUpdatedDate(Long updatedDate) {
-        this.updatedDate = updatedDate;
+    public void setClubs(List<Long> clubs) {
+        this.clubs = clubs;
     }
 }

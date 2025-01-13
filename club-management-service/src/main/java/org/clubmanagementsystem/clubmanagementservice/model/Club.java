@@ -6,10 +6,10 @@ import java.util.Date;
 
 @Entity
 
-public class Clubs {
+public class Club {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long clubId;
+    private Long Id;
 
     @Basic
     @Column(name = "name")
@@ -24,11 +24,12 @@ public class Clubs {
     private Date createdDate;
 
     @Basic
-    @Column(name = "updatedDate")
-    private Date updatedDate;
+    @Column(name = "club_manager_id")
+    private Long clubManagerId;
 
-    public Long getClubId() { return clubId; }
-    public void setClubId(Long clubId) { this.clubId = clubId; }
+
+    public Long getId() { return Id; }
+    public void setId(Long Id) { this.Id = this.Id; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
@@ -39,7 +40,7 @@ public class Clubs {
     public Date getCreatedDate() { return createdDate; }
     public void setCreatedDate(Date createdDate) { this.createdDate = createdDate; }
 
-    public Date getUpdatedDate() { return updatedDate; }
-    public void setUpdatedDate(Date updatedDate) { this.updatedDate = updatedDate; }
+    public Long getClubManagerId() { return clubManagerId; }
+    public void setClubManagerId(Long clubManagerId) { this.clubManagerId = clubManagerId; }
 
 }

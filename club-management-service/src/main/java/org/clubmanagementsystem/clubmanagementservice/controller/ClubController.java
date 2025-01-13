@@ -1,7 +1,7 @@
 package org.clubmanagementsystem.clubmanagementservice.controller;
 
 
-import org.clubmanagementsystem.clubmanagementservice.model.Clubs;
+import org.clubmanagementsystem.clubmanagementservice.model.Club;
 import org.clubmanagementsystem.clubmanagementservice.service.ClubService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,22 +21,22 @@ public class ClubController {
     }
 
     @PostMapping
-    public ResponseEntity<Clubs> createClub(@RequestBody Clubs club) {
+    public ResponseEntity<Club> createClub(@RequestBody Club club) {
         return new ResponseEntity<>(clubService.createClub(club), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Clubs> getClubById(@PathVariable Long id) {
+    public ResponseEntity<Club> getClubById(@PathVariable Long id) {
         return ResponseEntity.ok(clubService.getClubById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<Clubs>> getAllClubs() {
+    public ResponseEntity<List<Club>> getAllClubs() {
         return ResponseEntity.ok(clubService.getAllClubs());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Clubs> updateClub(@PathVariable Long id, @RequestBody Clubs club) {
+    public ResponseEntity<Club> updateClub(@PathVariable Long id, @RequestBody Club club) {
         return ResponseEntity.ok(clubService.updateClub(id, club));
     }
 

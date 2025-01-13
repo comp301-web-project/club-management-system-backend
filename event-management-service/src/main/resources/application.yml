@@ -1,9 +1,9 @@
 server:
-  port: 8283
+  port: 8282
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/club_management
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: 1
     driver-class-name: org.postgresql.Driver

@@ -1,53 +1,49 @@
 package org.clubmanagementsystem.usermanagementservice.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
 @Entity
-@Data
-@Getter
-@Setter
+@Table(name = "club_manager")
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class ClubManager {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long eventId;
+    private Long Id;
 
     @Basic
     @Column(name = "name")
     private String name;
 
     @Basic
+    @Column(name = "email")
+    private String email;
+
+    @Basic
+    @Column(name = "password")
+    private String password;
+
+    @Basic
+    @Column(name = "address")
+    private String address;
+
+    @Basic
     @Column(name = "description")
     private String description;
 
-    @Basic
-    @Column(name = "startDate")
-    private Date startDate;
 
     @Basic
-    @Column(name = "endDate")
-    private Date endDate;
+    @Column(name = "clubIds")
+    private Long clubIds;
 
-    @Basic
-    @Column(name = "clubId")
-    private Long clubId;
-
-    @Basic
-    @Column(name = "createdDate")
-    private Long createdDate;
-
-    @Basic
-    @Column(name = "updatedDate")
-    private Long updatedDate;
 
     // Getter methods
-    public Long getEventId() {
-        return eventId;
+    public Long getId() {
+        return Id;
     }
 
     public String getName() {
@@ -58,29 +54,32 @@ public class ClubManager {
         return description;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public String getEmail() {
+        return email;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public Long getClubIds() {
+        return clubIds;
     }
 
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public Long getClubId() {
-        return clubId;
-    }
-
-    public Long getCreatedDate() {
-        return createdDate;
-    }
-
-    public Long getUpdatedDate() {
-        return updatedDate;
-    }
 
     // Setter methods
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
+    public void setId(Long id) {
+        Id = id;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setName(String name) {
@@ -91,23 +90,7 @@ public class ClubManager {
         this.description = description;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public void setClubId(Long clubId) {
-        this.clubId = clubId;
-    }
-
-    public void setCreatedDate(Long createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public void setUpdatedDate(Long updatedDate) {
-        this.updatedDate = updatedDate;
+    public void setClubIds(Long clubIds) {
+        this.clubIds = clubIds;
     }
 }

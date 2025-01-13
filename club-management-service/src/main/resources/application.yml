@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/club_management
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: 1
     driver-class-name: org.postgresql.Driver
@@ -14,3 +14,4 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
