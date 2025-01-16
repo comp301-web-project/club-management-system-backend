@@ -46,7 +46,7 @@ public class ClubController {
         return ResponseEntity.noContent().build();
     }
 
-    
+
 }
 
 
