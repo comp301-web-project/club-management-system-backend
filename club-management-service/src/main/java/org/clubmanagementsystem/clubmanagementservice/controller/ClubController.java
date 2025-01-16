@@ -8,9 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
-
-@RequestMapping("/api/clubs")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
+@RequestMapping("/api/club")
 @RestController
 public class ClubController {
 
@@ -20,31 +22,63 @@ public class ClubController {
         this.clubService = clubService;
     }
 
-    @PostMapping
+    @PostMapping("/createClub")
     public ResponseEntity<Club> createClub(@RequestBody Club club) {
         return new ResponseEntity<>(clubService.createClub(club), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getClubById/{id}")
     public ResponseEntity<Club> getClubById(@PathVariable Long id) {
         return ResponseEntity.ok(clubService.getClubById(id));
     }
 
-    @GetMapping
+    @GetMapping("/getAllClubs")
     public ResponseEntity<List<Club>> getAllClubs() {
         return ResponseEntity.ok(clubService.getAllClubs());
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateClub/{id}")
     public ResponseEntity<Club> updateClub(@PathVariable Long id, @RequestBody Club club) {
         return ResponseEntity.ok(clubService.updateClub(id, club));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteClub/{id}")
     public ResponseEntity<Void> deleteClub(@PathVariable Long id) {
         clubService.deleteClub(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("getClubByStudentId/{id}")
+    public ResponseEntity<Optional<Club>> getClubByStudentId(@PathVariable Long id) {
+        return ResponseEntity.ok(clubService.getClubByStudentId(id));
+    }
+
+    @GetMapping("/getClubByClubManagerId/{id}")
+    public ResponseEntity<?> getClubByClubManagerId(@PathVariable Long id) {
+        try {
+            Club club = clubService.getClubByClubManagerId(id);
+            return ResponseEntity.ok(club);
+        } catch (RuntimeException e) {
+            if (e.getMessage().contains("has no associated club")) {
+                return ResponseEntity.ok().body(Map.of("message", "Club Manager has no associated club"));
+            }
+            throw e;
+        }
+    }
+
+    @GetMapping("/getClubsByStudentId/{id}")
+    public ResponseEntity<?> getClubsByStudentId(@PathVariable Long id) {
+        try {
+            List<Club> clubs = clubService.getClubsByStudentId(id);
+            if (clubs.isEmpty()) {
+                return ResponseEntity.ok().body(Map.of("message", "No clubs found for the student"));
+            }
+            return ResponseEntity.ok(clubs);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", e.getMessage()));
+        }
+    }
+
 }
 
 

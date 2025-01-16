@@ -14,3 +14,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
+
+api:
+  gateway:
+    url: http://localhost:8080

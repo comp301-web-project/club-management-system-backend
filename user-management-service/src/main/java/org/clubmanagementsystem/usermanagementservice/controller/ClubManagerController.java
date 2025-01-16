@@ -1,23 +1,50 @@
 package org.clubmanagementsystem.usermanagementservice.controller;
 
+import org.clubmanagementsystem.clubmanagementservice.dto.ClubManagerDTO;
 import org.clubmanagementsystem.usermanagementservice.model.ClubManager;
+import org.clubmanagementsystem.usermanagementservice.request.LoginRequest;
 import org.clubmanagementsystem.usermanagementservice.service.ClubManagerService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.clubmanagementsystem.usermanagementservice.util.DTOConverter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/clubManagers")
 public class ClubManagerController {
+
     private final ClubManagerService clubManagerService;
 
-    @Autowired
+
     public ClubManagerController(ClubManagerService clubManagerService) {
         this.clubManagerService = clubManagerService;
     }
+
+
+    @PostMapping("/login")
+    public ResponseEntity<?> loginClubManager(@RequestBody LoginRequest loginRequest) {
+        boolean isValid = clubManagerService.loginClubManager(loginRequest.getEmail(), loginRequest.getPassword());
+        if (isValid) {
+            // JSON formatında response dönüyoruz
+            Map<String, Object> response = new HashMap<>();
+            response.put("status", "success");
+            response.put("message", "Login successful");
+            response.put("email", loginRequest.getEmail());
+            response.put("id", clubManagerService.getClubManagerByEmail(loginRequest.getEmail()).getId());
+            return ResponseEntity.ok(response);
+        } else {
+            Map<String, String> error = new HashMap<>();
+            error.put("status", "error");
+            error.put("message", "Invalid credentials");
+            return ResponseEntity.badRequest().body(error);
+        }
+    }
+
 
     @PostMapping
     public ResponseEntity<ClubManager> createClubManager(@RequestBody ClubManager clubManager) {
@@ -26,9 +53,10 @@ public class ClubManagerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClubManager> getClubManagerById(@PathVariable Long id) {
+    public ResponseEntity<ClubManagerDTO> getClubManagerById(@PathVariable Long id) {
         ClubManager clubManager = clubManagerService.getClubManagerById(id);
-        return ResponseEntity.ok(clubManager);
+        ClubManagerDTO dto = DTOConverter.convertToDTO(clubManager);
+        return ResponseEntity.ok(dto);
     }
 
     @GetMapping

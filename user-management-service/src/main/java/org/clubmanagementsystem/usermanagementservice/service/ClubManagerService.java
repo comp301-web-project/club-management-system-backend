@@ -1,5 +1,6 @@
 package org.clubmanagementsystem.usermanagementservice.service;
 
+import org.clubmanagementsystem.clubmanagementservice.dto.ClubManagerDTO;
 import org.clubmanagementsystem.usermanagementservice.model.ClubManager;
 import org.clubmanagementsystem.usermanagementservice.repository.ClubManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,10 @@ import java.util.List;
 
 @Service
 public class ClubManagerService {
+
     private final ClubManagerRepository clubManagerRepository;
 
-    @Autowired
+
     public ClubManagerService(ClubManagerRepository clubManagerRepository) {
         this.clubManagerRepository = clubManagerRepository;
     }
@@ -43,5 +45,14 @@ public class ClubManagerService {
     public void deleteClubManager(Long id) {
         ClubManager clubManager = getClubManagerById(id);
         clubManagerRepository.delete(clubManager);
+    }
+
+    public boolean loginClubManager(String email, String password) {
+        return clubManagerRepository.existsByEmailAndPassword(email, password);
+    }
+
+    public ClubManager getClubManagerByEmail(String email) {
+        return clubManagerRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Club Manager not found with email: " + email));
     }
 }
