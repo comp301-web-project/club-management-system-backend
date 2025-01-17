@@ -1,9 +1,7 @@
 package org.clubmanagementsystem.usermanagementservice.service;
 
-import org.clubmanagementsystem.clubmanagementservice.dto.ClubManagerDTO;
 import org.clubmanagementsystem.usermanagementservice.model.ClubManager;
 import org.clubmanagementsystem.usermanagementservice.repository.ClubManagerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -17,7 +17,8 @@ spring:
         - id: user-management-service
           uri: http://localhost:8383
           predicates:
-            - Path=/api/users/**
+            - Path=/api/student/**
+            - Path=/api/clubManagers/**
         - id: club-management-service
           uri: http://localhost:8181
           predicates:

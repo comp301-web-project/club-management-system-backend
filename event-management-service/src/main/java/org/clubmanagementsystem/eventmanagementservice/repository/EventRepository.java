@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findByParticipantsContainingAndStartDateAfterOrderByStartDateAsc(Long studentId, Date currentDate);
+    List<Event> findByClubId(Long clubId);
 }

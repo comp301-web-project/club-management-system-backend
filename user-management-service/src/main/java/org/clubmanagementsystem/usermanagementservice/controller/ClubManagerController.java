@@ -1,10 +1,10 @@
 package org.clubmanagementsystem.usermanagementservice.controller;
 
-import org.clubmanagementsystem.clubmanagementservice.dto.ClubManagerDTO;
+import org.clubmanagementsystem.usermanagementservice.dto.ClubManagerDTO;
 import org.clubmanagementsystem.usermanagementservice.model.ClubManager;
 import org.clubmanagementsystem.usermanagementservice.request.LoginRequest;
 import org.clubmanagementsystem.usermanagementservice.service.ClubManagerService;
-import org.clubmanagementsystem.usermanagementservice.util.DTOConverter;
+import org.clubmanagementsystem.usermanagementservice.utils.ClubManagerDTOParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,10 +53,22 @@ public class ClubManagerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClubManagerDTO> getClubManagerById(@PathVariable Long id) {
-        ClubManager clubManager = clubManagerService.getClubManagerById(id);
-        ClubManagerDTO dto = DTOConverter.convertToDTO(clubManager);
-        return ResponseEntity.ok(dto);
+    public ResponseEntity<?> getClubManagerById(@PathVariable Long id) {
+        try {
+            ClubManager clubManager = clubManagerService.getClubManagerById(id);
+            ClubManagerDTO clubManagerDTO = ClubManagerDTOParser.toDTO(clubManager);
+            return ResponseEntity.ok(clubManagerDTO);
+        } catch (RuntimeException e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("status", "error");
+            response.put("message", "Club Manager not found with id: " + id);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        } catch (Exception e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("status", "error");
+            response.put("message", "An error occurred while fetching the Club Manager");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
     }
 
     @GetMapping

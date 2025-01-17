@@ -72,4 +72,17 @@ public class StudentController {
         studentService.deleteStudent(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/getAllStudentInClub/{clubId}")
+    public ResponseEntity<?> getAllStudentInClub(@PathVariable Long clubId) {
+        try {
+            List<Student> students = studentService.getAllStudentInClub(clubId);
+            if (students.isEmpty()) {
+                return ResponseEntity.ok().body(Map.of("message", "No students found for the club"));
+            }
+            return ResponseEntity.ok(students);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", e.getMessage()));
+        }
+    }
 }

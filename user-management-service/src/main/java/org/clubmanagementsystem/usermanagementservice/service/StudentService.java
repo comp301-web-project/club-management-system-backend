@@ -66,4 +66,8 @@ public class StudentService {
     public Student getStudentByEmail(String email) {
         return studentRepository.findByEmail(email);
     }
+
+    public List<Student> getAllStudentInClub(Long clubId) {
+        return studentRepository.findAllByClubsContaining(clubId);
+    }
 }

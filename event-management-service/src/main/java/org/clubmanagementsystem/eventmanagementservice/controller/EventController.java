@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @RequestMapping("/api/event")
 @RestController
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin(origins = "*")
 
 public class EventController {
 
@@ -97,6 +97,20 @@ public class EventController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("message", "Error updating event: " + e.getMessage()));
+        }
+    }
+
+    @GetMapping("/getEventsByClubId/{clubId}")
+    public ResponseEntity<?> getEventsByClubId(@PathVariable Long clubId) {
+        try {
+            List<Event> events = eventService.getEventsByClubId(clubId);
+            if (events.isEmpty()) {
+                return ResponseEntity.ok().body(Map.of("message", "No events found for this club"));
+            }
+            return ResponseEntity.ok(events);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("message", "Error fetching events: " + e.getMessage()));
         }
     }
 

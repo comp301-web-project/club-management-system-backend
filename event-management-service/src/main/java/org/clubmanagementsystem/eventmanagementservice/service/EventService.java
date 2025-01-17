@@ -72,4 +72,8 @@ public class EventService {
                 })
                 .collect(Collectors.toList());
     }
+
+    public List<Event> getEventsByClubId(Long clubId) {
+        return eventRepository.findByClubId(clubId);
+    }
 }
